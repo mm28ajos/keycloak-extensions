@@ -43,7 +43,7 @@ public class LocationService {
             JsonNode root = mapper.readTree(response.toString());
 
             // return in format 'Country, Continent'
-            return root.get("country").get("names").get("en").asText() + ", " + root.get("continent").get("names").get("en").asText();
+            return root.get("country").get("names").get(localeLanguage).asText() + ", " + root.get("continent").get("names").get(localeLanguage).asText();
         } else {
             // error response
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
