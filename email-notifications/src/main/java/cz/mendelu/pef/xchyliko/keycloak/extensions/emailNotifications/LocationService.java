@@ -55,8 +55,12 @@ public class LocationService {
             }
             in.close();
 
+	    // parse response JSON
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.toString());
+
             log.error("Error: " + response);
-            return "unknown location";
+            return "unknown location (" + root.get("code").asText() + ")";
         }
     }
 }
