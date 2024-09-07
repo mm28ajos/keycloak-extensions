@@ -33,7 +33,7 @@ public class EmailNotificationsProvider implements EventListenerProvider {
             return;
 
         UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
+        var currentIP = session.getContext().getHttpRequest().getHttpHeaders().getHeaderString("X-Forwarded-For");
         var savedAddresses = user.getAttributes().get("loginIPAddresses");
 
         // first time login from this IP address
@@ -75,7 +75,7 @@ public class EmailNotificationsProvider implements EventListenerProvider {
         }
 
         // get user agent e.g. Firefox
-        var userAgent = context.getRequestHeaders().getHeaderString("User-Agent");
+        var userAgent = context.getHttpRequest().getHttpHeaders().getHeaderString("User-Agent");
 
         // determine which language use in e-mail if there are more to choose
         Locale locale = session.getContext().resolveLocale(userModel);
