@@ -41,7 +41,7 @@ public class EmailNotificationsProvider implements EventListenerProvider {
 
         // first time login from this IP address
         if (currentIP != null && (savedAddresses == null || !savedAddresses.contains(currentIP))) {
-            log.warn("This is first time login from this IP: " + currentIP);
+            log.info("This is first time login from this IP: " + currentIP);
             log.info("Adding IP " + currentIP + " to list.");
             log.info("Sending notification e-mail.");
             sendNotificationEmail(session.getContext(), user, currentIP, config.get("COUNTRY_URL"), config.get("ACCOUNT_ID"), config.get("LICENSE_KEY"), config.get("SUBJECT_PREFIX"));
